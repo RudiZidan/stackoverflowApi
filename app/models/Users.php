@@ -1,5 +1,5 @@
 <?php
-
+use Phalcon\Mvc\Model\Query;
 class Users extends \Phalcon\Mvc\Model
 {
 
@@ -180,6 +180,7 @@ class Users extends \Phalcon\Mvc\Model
     }
 
     public static function copyUsersToModerator(){
+        
         $moderators = Users::findByuser_type('moderator');
         foreach ($moderators as $userToBeModerator) {
             $moderator = new Moderators();

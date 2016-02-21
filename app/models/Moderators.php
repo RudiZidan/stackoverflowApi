@@ -1,5 +1,5 @@
 <?php
-
+use Phalcon\Mvc\Model\Query;
 class Moderators extends \Phalcon\Mvc\Model
 {
 
@@ -53,6 +53,17 @@ class Moderators extends \Phalcon\Mvc\Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    public static function getModeratorsBasedOnLocation(){
+        $modelManager = \Phalcon\Di::getDefault()->getShared('modelsManager');
+        $query = $modelManager->createQuery("select Users.location, count(Moderators.id) as total_moderators from Moderators INNER JOIN Users on Users.id = Moderators.user_id GROUP BY Users.location ");
+        $data  = $query->execute();
+        $result = array();
+        foreach ($data as $location) {
+            $result[]=[0,$location->total_moderators];
+        }
+        return json_encode($result);
     }
 
 }
