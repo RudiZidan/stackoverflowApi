@@ -8,5 +8,9 @@ class UsersController extends \Phalcon\Mvc\Controller
     	$this->view->users = Users::find();
     }
 
+    public function statisticsAction(){
+    	
+    }
+
 }
 
