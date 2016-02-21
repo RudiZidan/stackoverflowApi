@@ -10,6 +10,9 @@ class IndexController extends ControllerBase
     		Users::insertStackUsers($this->callStackAPI("http://api.stackexchange.com/2.2/users?order=desc&page=".($i+1)."&pagesize=100&sort=reputation&site=stackoverflow"));
     	}
     }
+    public function convertToModeratorsAction(){
+    	Users::copyUsersToModerator();
+    }
 
 }
 

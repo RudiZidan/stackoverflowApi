@@ -179,4 +179,13 @@ class Users extends \Phalcon\Mvc\Model
         }
     }
 
+    public static function copyUsersToModerator(){
+        $moderators = Users::findByuser_type('moderator');
+        foreach ($moderators as $userToBeModerator) {
+            $moderator = new Moderators();
+            $moderator->user_id = $userToBeModerator->id;
+            $moderator->save();
+        }
+    }
+
 }
